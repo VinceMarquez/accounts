@@ -1,11 +1,13 @@
 package com.pccwglobal.accounts.service.impl;
 
+import com.pccwglobal.accounts.constants.EmailConstants;
 import com.pccwglobal.accounts.dto.AccountDto;
 import com.pccwglobal.accounts.entity.Account;
 import com.pccwglobal.accounts.exception.AccountNotFoundException;
 import com.pccwglobal.accounts.exception.UsernameAlreadyExistsException;
 import com.pccwglobal.accounts.repository.AccountsRepository;
 import com.pccwglobal.accounts.service.AccountsService;
+import com.pccwglobal.accounts.service.EmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,8 @@ import java.util.List;
 public class AccountsServiceImpl implements AccountsService {
 
     private AccountsRepository accountsRepository;
+
+    private EmailService emailService;
 
     @Override
     public void createAccount(AccountDto accountDto) {
@@ -36,6 +40,8 @@ public class AccountsServiceImpl implements AccountsService {
         newAccount.setIsDeleted(false);
 
         accountsRepository.save(newAccount);
+
+        emailService.sendEmail(accountDto.getEmail(), EmailConstants.EMAIL_SUBJECT, EmailConstants.EMAIL_BODY);
     }
 
     @Override
