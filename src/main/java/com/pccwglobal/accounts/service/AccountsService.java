@@ -11,4 +11,6 @@ public interface AccountsService {
 
     List<Account> getAccounts(List<String> userNames);
 
+    void updateAccounts(List<AccountDto> accountsDto);
+
 }

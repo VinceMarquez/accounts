@@ -8,6 +8,8 @@ import com.pccwglobal.accounts.repository.AccountsRepository;
 import com.pccwglobal.accounts.service.AccountsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -43,5 +45,25 @@ public class AccountsServiceImpl implements AccountsService {
             throw new AccountNotFoundException(userNames);
         }
         return accounts;
+    }
+
+    @Override
+    @Transactional
+    public void updateAccounts(List<AccountDto> accountsDto) {
+        Account account;
+        for (AccountDto accountDto : accountsDto) {
+            account = accountsRepository.findByUserName(accountDto.getUserName());
+
+            if (account == null) {
+                throw new AccountNotFoundException(accountDto.getUserName());
+            }
+
+            account.setFirstName(accountDto.getFirstName());
+            account.setLastName(accountDto.getLastName());
+            account.setEmail(accountDto.getEmail());
+            account.setDateModified(LocalDateTime.now());
+
+            accountsRepository.save(account);
+        }
     }
 }
