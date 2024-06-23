@@ -2,7 +2,6 @@ package com.pccwglobal.accounts.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 
@@ -37,7 +36,10 @@ public class Account {
     @Column(name = "DATE_MODIFIED")
     private LocalDateTime dateModified;
 
-    @Column(name = "DATE_DELETED", updatable = false)
+    @Column(name = "DATE_DELETED")
     private LocalDateTime dateDeleted;
+
+    @Column(name = "IS_DELETED")
+    private Boolean isDeleted;
 
 }

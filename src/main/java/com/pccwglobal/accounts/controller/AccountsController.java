@@ -37,8 +37,16 @@ public class AccountsController {
     }
 
     @PutMapping("/account")
-    public ResponseEntity<ResponseDto> updateAccount(@RequestBody List<AccountDto> accountsDto) {
+    public ResponseEntity<ResponseDto> updateAccounts(@RequestBody List<AccountDto> accountsDto) {
         accountsService.updateAccounts(accountsDto);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ResponseDto(HttpResponseConstants.STATUS_200, HttpResponseConstants.MESSAGE_200));
+    }
+
+    @DeleteMapping("/account")
+    public ResponseEntity<ResponseDto> deleteAccounts(@RequestBody List<String> userNames) {
+        accountsService.deleteAccounts(userNames);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(new ResponseDto(HttpResponseConstants.STATUS_200, HttpResponseConstants.MESSAGE_200));

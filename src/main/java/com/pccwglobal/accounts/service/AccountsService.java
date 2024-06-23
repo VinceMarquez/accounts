@@ -13,4 +13,6 @@ public interface AccountsService {
 
     void updateAccounts(List<AccountDto> accountsDto);
 
+    void deleteAccounts(List<String> userNames);
+
 }

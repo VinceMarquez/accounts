@@ -33,14 +33,14 @@ public class AccountsServiceImpl implements AccountsService {
         newAccount.setLastName(accountDto.getLastName());
         newAccount.setEmail(accountDto.getEmail());
         newAccount.setDateCreated(LocalDateTime.now());
-
+        newAccount.setIsDeleted(false);
 
         accountsRepository.save(newAccount);
     }
 
     @Override
     public List<Account> getAccounts(List<String> userNames) {
-        List<Account> accounts = accountsRepository.findAllByUserNameIn(userNames);
+        List<Account> accounts = accountsRepository.findAllByUserNameInAndIsDeletedFalse(userNames);
         if (accounts.isEmpty()) {
             throw new AccountNotFoundException(userNames);
         }
@@ -63,6 +63,17 @@ public class AccountsServiceImpl implements AccountsService {
             account.setEmail(accountDto.getEmail());
             account.setDateModified(LocalDateTime.now());
 
+            accountsRepository.save(account);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deleteAccounts(List<String> userNames) {
+        List<Account> accounts = accountsRepository.findAllByUserNameInAndIsDeletedFalse(userNames);
+        for (Account account : accounts) {
+            account.setIsDeleted(true);
+            account.setDateDeleted(LocalDateTime.now());
             accountsRepository.save(account);
         }
     }
