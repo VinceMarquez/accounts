@@ -16,7 +16,8 @@ For building and running the application you need:
 To run the application, follow these steps:
 
 1. Open Docker Desktop application. Make sure engine is running.
-2. Open [runaccounts.bat](runaccounts.bat) to start building and running the application.
+2. Make sure that port 8080 is available in the machine.
+3. Open [runaccounts.bat](runaccounts.bat) to start building and running the application.
 
 ## Accessing the database
 
@@ -31,3 +32,14 @@ To access the database, follow these steps:
    * User Name: test
    * Password: (leave as blank)
 4. Click Connect.
+
+## Checking if Email Service is working
+
+The application is using a fake SMTP server called [Ethereal](https://ethereal.email/).
+To check if an email is successfully sent after registering a user using the POST /account API, follow these steps:
+
+1. Go to https://ethereal.email/login in your browser.
+2. Use the following credentials then click Login:
+   * Email address: armando31@ethereal.email
+   * Password: NVfswZQD15Vnkqp2FK
+3. Go to [Messages tab](https://ethereal.email/messages) to check if the email is sent.
