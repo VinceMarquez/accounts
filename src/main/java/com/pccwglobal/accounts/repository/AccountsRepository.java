@@ -8,8 +8,8 @@ import java.util.List;
 @Repository
 public interface AccountsRepository extends JpaRepository<Account, Long> {
 
-    public Account findByUserName(String userName);
+    Account findByUserName(String userName);
 
-    public List<Account> findAllByUserNameInAndIsDeletedFalse(List<String> userNames);
+    List<Account> findAllByUserNameInAndIsDeletedFalse(List<String> userNames);
 
 }

@@ -6,7 +6,5 @@ public class HttpResponseConstants {
     public static final String MESSAGE_200 = "Successful Request";
     public static final String STATUS_201 = "201";
     public static final String MESSAGE_201 = "Account Registered Successfully";
-    public static final String STATUS_500 = "500";
-    public static final String MESSAGE_500 = "Unsuccessful Request";
 
 }

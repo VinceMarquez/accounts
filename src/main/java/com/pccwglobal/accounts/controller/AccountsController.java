@@ -5,10 +5,12 @@ import com.pccwglobal.accounts.dto.AccountDto;
 import com.pccwglobal.accounts.dto.ResponseDto;
 import com.pccwglobal.accounts.entity.Account;
 import com.pccwglobal.accounts.service.AccountsService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,12 +18,13 @@ import java.util.List;
 @RestController
 @RequestMapping(path="/api", produces={MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
+@Validated
 public class AccountsController {
 
     private AccountsService accountsService;
 
     @PostMapping("/account")
-    public ResponseEntity<ResponseDto> registerAccount(@RequestBody AccountDto accountDto) {
+    public ResponseEntity<ResponseDto> registerAccount(@Valid @RequestBody AccountDto accountDto) {
         accountsService.createAccount(accountDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -37,7 +40,7 @@ public class AccountsController {
     }
 
     @PutMapping("/account")
-    public ResponseEntity<ResponseDto> updateAccounts(@RequestBody List<AccountDto> accountsDto) {
+    public ResponseEntity<ResponseDto> updateAccounts(@Valid @RequestBody List<AccountDto> accountsDto) {
         accountsService.updateAccounts(accountsDto);
         return ResponseEntity
                 .status(HttpStatus.OK)
