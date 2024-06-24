@@ -3,18 +3,11 @@
 ## Requirements
 
 For building and running the application you need:
-
-
 - [Docker Desktop](https://docs.docker.com/desktop/install/windows-install/)
-- [JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-- [Maven](https://maven.apache.org/download.cgi)
-- [Set JAVA_HOME in System Variables](https://javatutorial.net/set-java-home-windows-10/)
-- [Set MAVEN_HOME in System Variables](https://www.qamadness.com/knowledge-base/how-to-install-maven-and-configure-environment-variables/)
 
 ## Running the application locally
 
 To run the application, follow these steps:
-
 1. Open Docker Desktop application. Make sure engine is running.
 2. Make sure that port 8080 is available in the machine.
 3. Open [runaccounts.bat](runaccounts.bat) to start building and running the application.
