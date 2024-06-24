@@ -43,3 +43,10 @@ To check if an email is successfully sent after registering a user using the POS
    * Email address: armando31@ethereal.email
    * Password: NVfswZQD15Vnkqp2FK
 3. Go to [Messages tab](https://ethereal.email/messages) to check if the email is sent.
+
+## Accessing the API Documentation
+
+Before accessing the documentation, make sure that the application is running.
+Link for the API Documentation of the Accounts Service: http://localhost:8080/swagger-ui/index.html#/
+
+Alternatively, here is a PDF file with the API Documentation: [Accounts Service API Documentation.pdf](Accounts%20Service%20API%20Documentation.pdf)
