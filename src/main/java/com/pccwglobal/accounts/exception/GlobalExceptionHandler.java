@@ -2,6 +2,9 @@ package com.pccwglobal.accounts.exception;
 
 
 import com.pccwglobal.accounts.dto.ErrorResponseDto;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Path;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -41,6 +45,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         for(ObjectError error : errorsList) {
             validationErrors.put(((FieldError)error).getField(), error.getDefaultMessage());
+        }
+
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.BAD_REQUEST, validationErrors.toString());
+        return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponseDto> handleConstraintViolationException(ConstraintViolationException e) {
+        Map<String, String> validationErrors = new HashMap<>();
+        Set<ConstraintViolation<?>> errorsList = e.getConstraintViolations();
+        String fieldName = null;
+
+        for(ConstraintViolation<?> error : errorsList) {
+            for (Path.Node node : error.getPropertyPath()) {
+                fieldName = node.getName();
+            }
+            validationErrors.put(fieldName, error.getMessage());
         }
 
         ErrorResponseDto errorResponseDto = new ErrorResponseDto(HttpStatus.BAD_REQUEST, validationErrors.toString());

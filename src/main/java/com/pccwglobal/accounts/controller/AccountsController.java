@@ -58,7 +58,7 @@ public class AccountsController {
             description = "API to update account details of one or more users."
     )
     @PutMapping("/account")
-    public ResponseEntity<ResponseDto> updateAccounts(@Valid @RequestBody List<AccountDto> accountsDto) {
+    public ResponseEntity<ResponseDto> updateAccounts(@RequestBody List<@Valid AccountDto> accountsDto) {
         accountsService.updateAccounts(accountsDto);
         return ResponseEntity
                 .status(HttpStatus.OK)
