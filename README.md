@@ -4,6 +4,7 @@
 
 For building and running the application you need:
 - [Docker Desktop](https://docs.docker.com/desktop/install/windows-install/)
+- Active internet connection
 
 ## Running the application locally
 
